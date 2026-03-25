@@ -1659,6 +1659,44 @@
       </div>
     </div>
 
+  <!-- ══ SECTION PROVERBES ══ -->
+  <div class="card" id="pv_card" style="margin-top:22px;padding:0;overflow:hidden;">
+    <div style="padding:18px 28px 14px;background:var(--parchment);">
+      <div class="week-row" style="margin-bottom:6px;">
+        <div class="week-line"></div>
+        <div class="week-label" style="color:#5C7A30;" id="pv_weekLabel">—</div>
+        <div class="week-line"></div>
+      </div>
+      <div style="display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;">
+        <div style="display:flex;align-items:baseline;gap:10px;">
+          <div style="font-family:'Frank Ruhl Libre',serif;font-size:clamp(1.8rem,7vw,3rem);color:var(--ink);line-height:1;">מִשְׁלֵי</div>
+          <div>
+            <div class="seder-sub" style="color:#5C7A30;margin-bottom:2px;">Proverbes · מִשְׁלֵי</div>
+            <div class="ref-main" id="pv_ref" style="color:var(--ink);font-size:clamp(1rem,3vw,1.4rem);">—</div>
+            <div class="ref-heb" id="pv_refHeb" style="font-size:clamp(0.85rem,2.5vw,1.1rem);">—</div>
+          </div>
+        </div>
+        <div style="flex:1;min-width:140px;">
+          <div class="progress-labels" style="margin-bottom:4px;">
+            <span id="pv_progressLabel">Semaine — / 154</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" id="pv_progressFill" style="width:0%;background:linear-gradient(to right,#3D6020,#7AB840);"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="border-top:1px solid var(--parchment-dark);">
+      <div class="text-header" style="background:var(--parchment);border-bottom:1px solid var(--parchment-dark);">
+        <div class="text-header-title" id="pv_textTitle">Passage des Proverbes</div>
+        <div class="lang-badge" id="pv_langBadge">Hébreu · Français</div>
+      </div>
+      <div class="text-body" id="pv_textBody" style="background:var(--parchment);max-height:60vh;">
+        <div class="text-loading"><div class="spinner"></div><div class="loading-text">Chargement depuis Sefaria…</div></div>
+      </div>
+    </div>
+  </div>
+
  <div class="text-section" style="margin-top:48px;">
     <div style="display:flex;align-items:center;gap:14px;margin-bottom:18px;">
         <div style="flex:1;height:1px;background:linear-gradient(to right,transparent,rgba(180,140,0,0.35));"></div>
@@ -1668,89 +1706,211 @@
 </div>
 
 
-    <!-- SECTION PUBLICITÉ LIVRE -->
-    <div class="text-section" style="margin-top:28px;">
-      <div style="
-        background: linear-gradient(160deg, #1a0a00 0%, #2a0e04 60%, #1a0a00 100%);
-        border: 1.5px solid var(--gold);
-        border-radius: 4px;
-        box-shadow: var(--card-shadow);
-        overflow: hidden;
+    <!-- SECTION CARROUSEL LIVRES -->
+    <style>
+      .books-carousel-outer {
         position: relative;
-      ">
-        <!-- Coins décoratifs -->
-        <div style="position:absolute;top:8px;left:12px;color:var(--gold);font-size:0.7rem;opacity:0.5;">✦</div>
-        <div style="position:absolute;top:8px;right:12px;color:var(--gold);font-size:0.7rem;opacity:0.5;">✦</div>
-        <div style="position:absolute;bottom:8px;left:12px;color:var(--gold);font-size:0.7rem;opacity:0.5;">✦</div>
-        <div style="position:absolute;bottom:8px;right:12px;color:var(--gold);font-size:0.7rem;opacity:0.5;">✦</div>
+        overflow: hidden;
+        border-radius: 4px;
+        border: 1.5px solid var(--gold);
+        box-shadow: var(--card-shadow);
+      }
+      .books-carousel-track {
+        display: flex;
+        transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        will-change: transform;
+      }
+      .book-slide {
+        flex: 0 0 100%;
+        min-width: 0;
+        background: linear-gradient(160deg, #1a0a00 0%, #2a0e04 60%, #1a0a00 100%);
+        position: relative;
+      }
+      .book-slide-mishna {
+        background: linear-gradient(160deg, #0d1a0a 0%, #1a2e10 60%, #0d1a0a 100%);
+      }
+      .carousel-dots {
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+        padding: 10px 0 6px;
+        border-top: 1px solid rgba(180,140,0,0.18);
+        background: rgba(0,0,0,0.2);
+      }
+      .carousel-dot {
+        width: 6px; height: 6px;
+        border-radius: 50%;
+        background: rgba(180,140,0,0.3);
+        border: none;
+        cursor: pointer;
+        transition: background 0.2s;
+        padding: 0;
+      }
+      .carousel-dot.active { background: var(--gold-light); }
+      .carousel-arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(0,0,0,0.45);
+        border: 1px solid rgba(180,140,0,0.3);
+        color: rgba(201,150,10,0.85);
+        font-size: 1rem;
+        width: 28px; height: 28px;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex; align-items: center; justify-content: center;
+        z-index: 10;
+        transition: background 0.18s;
+        line-height: 1;
+      }
+      .carousel-arrow:hover { background: rgba(180,140,0,0.2); color: var(--gold-light); }
+      .carousel-arrow.prev { left: 8px; }
+      .carousel-arrow.next { right: 8px; }
+    </style>
 
-      
+    <div class="text-section" style="margin-top:28px;">
+      <div class="books-carousel-outer">
 
-        <!-- Corps principal -->
-        <div style="display:flex;gap:0;align-items:stretch;flex-wrap:wrap;">
+        <!-- Flèches navigation -->
+        <button class="carousel-arrow prev" onclick="booksCarousel(-1)" aria-label="Livre précédent">‹</button>
+        <button class="carousel-arrow next" onclick="booksCarousel(1)" aria-label="Livre suivant">›</button>
 
-          <!-- Colonne image -->
-          <div style="flex-shrink:0;width:150px;background:rgba(0,0,0,0.35);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px 14px;gap:12px;border-right:1px solid rgba(180,140,0,0.2);">
-            <a href="https://www.amazon.fr/contre-missionnaires-J%C3%A9r%C3%A9mie-Israel/dp/B0FYQFJQRT" target="_blank" rel="noopener" style="display:block;">
-              <img
-                src="https://images-na.ssl-images-amazon.com/images/P/B0FYQFJQRT.01.LZZZZZZZ.jpg"
-                onerror="this.onerror=null;this.src='https://m.media-amazon.com/images/P/B0FYQFJQRT.01._SCLZZZZZZZ_.jpg';this.onerror=function(){this.parentNode.innerHTML='<div style=\'width:110px;height:160px;background:linear-gradient(160deg,#6E1020,#3B1005);border:1.5px solid rgba(180,140,0,0.5);border-radius:3px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px;text-align:center;gap:8px;box-shadow:0 4px 20px rgba(0,0,0,0.7);\'><span style=\'font-size:2rem;color:#C9960A;\'>✡</span><span style=\'font-family:Cinzel,serif;font-size:0.5rem;letter-spacing:0.12em;color:rgba(245,237,213,0.95);text-transform:uppercase;line-height:1.6;\'>Les Contre-<br>Missionnaires</span><div style=\'width:60%;height:1px;background:rgba(180,140,0,0.4);\'></div><span style=\'font-family:Cormorant Garamond,serif;font-size:0.58rem;font-style:italic;color:rgba(201,150,10,0.9);\'>Jérémie Israel</span></div>\'}"
-                alt="Les Contre-Missionnaires — couverture"
-                style="width:115px;border-radius:3px;box-shadow:0 6px 24px rgba(0,0,0,0.75);display:block;transition:transform 0.2s ease;"
-                onmouseover="this.style.transform='scale(1.04)'"
-                onmouseout="this.style.transform=''"
-              />
-            </a>
-            <!-- Étoiles / note -->
-            <div style="color:#C9960A;font-size:0.75rem;letter-spacing:2px;">★★★★★</div>
+        <div class="books-carousel-track" id="booksCarouselTrack">
+
+          <!-- ── SLIDE 1 : Les Contre-Missionnaires ── -->
+          <div class="book-slide">
+            <!-- Coins décoratifs -->
+            <div style="position:absolute;top:8px;left:12px;color:var(--gold);font-size:0.7rem;opacity:0.5;pointer-events:none;">✦</div>
+            <div style="position:absolute;top:8px;right:12px;color:var(--gold);font-size:0.7rem;opacity:0.5;pointer-events:none;">✦</div>
+            <div style="position:absolute;bottom:30px;left:12px;color:var(--gold);font-size:0.7rem;opacity:0.5;pointer-events:none;">✦</div>
+            <div style="position:absolute;bottom:30px;right:12px;color:var(--gold);font-size:0.7rem;opacity:0.5;pointer-events:none;">✦</div>
+
+            <div style="display:flex;gap:0;align-items:stretch;flex-wrap:wrap;">
+              <!-- Colonne image -->
+              <div style="flex-shrink:0;width:150px;background:rgba(0,0,0,0.35);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px 14px;gap:12px;border-right:1px solid rgba(180,140,0,0.2);">
+                <a href="https://www.amazon.fr/contre-missionnaires-J%C3%A9r%C3%A9mie-Israel/dp/B0FYQFJQRT" target="_blank" rel="noopener" style="display:block;">
+                  <img
+                    src="https://images-na.ssl-images-amazon.com/images/P/B0FYQFJQRT.01.LZZZZZZZ.jpg"
+                    onerror="this.onerror=null;this.src='https://m.media-amazon.com/images/P/B0FYQFJQRT.01._SCLZZZZZZZ_.jpg';this.onerror=function(){this.parentNode.innerHTML='<div style=\'width:110px;height:160px;background:linear-gradient(160deg,#6E1020,#3B1005);border:1.5px solid rgba(180,140,0,0.5);border-radius:3px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px;text-align:center;gap:8px;box-shadow:0 4px 20px rgba(0,0,0,0.7);\'><span style=\'font-size:2rem;color:#C9960A;\'>✡</span><span style=\'font-family:Cinzel,serif;font-size:0.5rem;letter-spacing:0.12em;color:rgba(245,237,213,0.95);text-transform:uppercase;line-height:1.6;\'>Les Contre-<br>Missionnaires</span><div style=\'width:60%;height:1px;background:rgba(180,140,0,0.4);\'></div><span style=\'font-family:Cormorant Garamond,serif;font-size:0.58rem;font-style:italic;color:rgba(201,150,10,0.9);\'>Jérémie Israel</span></div>\'}"
+                    alt="Les Contre-Missionnaires — couverture"
+                    style="width:115px;border-radius:3px;box-shadow:0 6px 24px rgba(0,0,0,0.75);display:block;transition:transform 0.2s ease;"
+                    onmouseover="this.style.transform='scale(1.04)'"
+                    onmouseout="this.style.transform=''"
+                  />
+                </a>
+                <div style="color:#C9960A;font-size:0.75rem;letter-spacing:2px;">★★★★★</div>
+              </div>
+              <!-- Colonne texte -->
+              <div style="flex:1;min-width:200px;padding:22px 24px 20px;">
+                <div style="font-family:'Cinzel',serif;font-size:0.52rem;letter-spacing:0.38em;color:rgba(201,150,10,0.85);text-transform:uppercase;margin-bottom:8px;">Apologétique Juive · Nouvelle Parution</div>
+                <div style="font-family:'Cinzel',serif;font-size:clamp(1.05rem,3.5vw,1.5rem);font-weight:700;color:var(--parchment);line-height:1.15;margin-bottom:4px;">Les Contre-Missionnaires</div>
+                <div style="font-family:'Cormorant Garamond',serif;font-size:0.9rem;color:rgba(201,150,10,0.9);font-style:italic;margin-bottom:14px;letter-spacing:0.05em;">par Jérémie Israel</div>
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;">
+                  <div style="flex:1;height:1px;background:linear-gradient(to right,rgba(180,140,0,0.4),transparent);"></div>
+                  <span style="color:var(--gold);font-size:0.55rem;">✦</span>
+                  <div style="flex:1;height:1px;background:linear-gradient(to left,rgba(180,140,0,0.4),transparent);"></div>
+                </div>
+                <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(0.92rem,2.3vw,1.06rem);color:rgba(245,237,213,0.88);line-height:1.75;margin-bottom:18px;font-style:italic;">
+                  « Les missionnaires chrétiens redoublent d'efforts pour convaincre les Juifs que Jésus est le Messie promis par la Torah. Face à eux, <em style="color:var(--parchment);font-style:normal;font-weight:600;">Les Contre-Missionnaires</em> arme chaque Juif des réponses précises qu'il lui faut : verset par verset, argument par argument, les affirmations les plus répandues sont analysées et réfutées à la lumière des sources hébraïques authentiques. »
+                </div>
+                <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(0.88rem,2.1vw,1rem);color:rgba(245,237,213,0.72);line-height:1.65;margin-bottom:20px;">
+                  Un guide de référence clair, rigoureux et accessible — pour comprendre sa foi, la défendre et la transmettre avec assurance. Indispensable dans toute bibliothèque juive.
+                </div>
+                <a href="https://www.amazon.fr/contre-missionnaires-J%C3%A9r%C3%A9mie-Israel/dp/B0FYQFJQRT" target="_blank" rel="noopener"
+                   style="display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,var(--crimson),#7E1228);color:#fff;font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:0.22em;padding:11px 22px;border-radius:2px;text-decoration:none;text-transform:uppercase;border:1px solid rgba(255,255,255,0.15);box-shadow:0 2px 12px rgba(110,16,32,0.5);transition:filter 0.18s ease;"
+                   onmouseover="this.style.filter='brightness(1.15)'"
+                   onmouseout="this.style.filter=''">
+                  <span>Commander sur Amazon</span>
+                  <span style="font-size:1rem;opacity:0.85;">↗</span>
+                </a>
+              </div>
+            </div>
           </div>
 
-          <!-- Colonne texte -->
-          <div style="flex:1;min-width:200px;padding:22px 24px 20px;">
+          <!-- ── SLIDE 2 : Aux sources de la Mishna ── -->
+          <div class="book-slide book-slide-mishna">
+            <!-- Coins décoratifs -->
+            <div style="position:absolute;top:8px;left:12px;color:var(--gold);font-size:0.7rem;opacity:0.5;pointer-events:none;">✦</div>
+            <div style="position:absolute;top:8px;right:12px;color:var(--gold);font-size:0.7rem;opacity:0.5;pointer-events:none;">✦</div>
+            <div style="position:absolute;bottom:30px;left:12px;color:var(--gold);font-size:0.7rem;opacity:0.5;pointer-events:none;">✦</div>
+            <div style="position:absolute;bottom:30px;right:12px;color:var(--gold);font-size:0.7rem;opacity:0.5;pointer-events:none;">✦</div>
 
-            <!-- Catégorie -->
-            <div style="font-family:'Cinzel',serif;font-size:0.52rem;letter-spacing:0.38em;color:rgba(201,150,10,0.85);text-transform:uppercase;margin-bottom:8px;">Apologétique Juive · Nouvelle Parution</div>
-
-            <!-- Titre -->
-            <div style="font-family:'Cinzel',serif;font-size:clamp(1.05rem,3.5vw,1.5rem);font-weight:700;color:var(--parchment);line-height:1.15;margin-bottom:4px;">Les Contre-Missionnaires</div>
-
-            <!-- Auteur -->
-            <div style="font-family:'Cormorant Garamond',serif;font-size:0.9rem;color:rgba(201,150,10,0.9);font-style:italic;margin-bottom:14px;letter-spacing:0.05em;">par Jérémie Israel</div>
-
-            <!-- Séparateur -->
-            <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;">
-              <div style="flex:1;height:1px;background:linear-gradient(to right,rgba(180,140,0,0.4),transparent);"></div>
-              <span style="color:var(--gold);font-size:0.55rem;">✦</span>
-              <div style="flex:1;height:1px;background:linear-gradient(to left,rgba(180,140,0,0.4),transparent);"></div>
+            <div style="display:flex;gap:0;align-items:stretch;flex-wrap:wrap;">
+              <!-- Colonne image -->
+              <div style="flex-shrink:0;width:150px;background:rgba(0,0,0,0.35);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px 14px;gap:12px;border-right:1px solid rgba(180,140,0,0.2);">
+                <img
+                  src="6ce6452a-7075-4b19-90b9-6723bb5c2011.png"
+                  alt="Aux sources de la Mishna — couverture"
+                  style="width:115px;border-radius:3px;box-shadow:0 6px 24px rgba(0,0,0,0.75);display:block;transition:transform 0.2s ease;"
+                  onmouseover="this.style.transform='scale(1.04)'"
+                  onmouseout="this.style.transform=''"
+                  onerror="this.parentNode.innerHTML='<div style=\'width:110px;height:160px;background:linear-gradient(160deg,#1a3a1a,#0d2010);border:1.5px solid rgba(180,140,0,0.5);border-radius:3px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px;text-align:center;gap:8px;box-shadow:0 4px 20px rgba(0,0,0,0.7);\'><span style=\'font-size:2rem;color:#C9960A;\'>📜</span><span style=\'font-family:Cinzel,serif;font-size:0.48rem;letter-spacing:0.1em;color:rgba(245,237,213,0.95);text-transform:uppercase;line-height:1.6;\'>Aux sources<br>de la Mishna</span><div style=\'width:60%;height:1px;background:rgba(180,140,0,0.4);\'></div><span style=\'font-family:Cormorant Garamond,serif;font-size:0.58rem;font-style:italic;color:rgba(201,150,10,0.9);\'>Jérémie Israel</span></div>'"
+                />
+                <div style="color:#C9960A;font-size:0.75rem;letter-spacing:2px;opacity:0.6;">✦✦✦</div>
+              </div>
+              <!-- Colonne texte -->
+              <div style="flex:1;min-width:200px;padding:22px 24px 20px;">
+                <div style="font-family:'Cinzel',serif;font-size:0.52rem;letter-spacing:0.38em;color:rgba(201,150,10,0.85);text-transform:uppercase;margin-bottom:8px;">Étude Talmudique · Recherche Universitaire</div>
+                <div style="font-family:'Cinzel',serif;font-size:clamp(1.05rem,3.5vw,1.5rem);font-weight:700;color:var(--parchment);line-height:1.15;margin-bottom:4px;">Aux sources de la Mishna</div>
+                <div style="font-family:'Cormorant Garamond',serif;font-size:0.9rem;color:rgba(201,150,10,0.9);font-style:italic;margin-bottom:14px;letter-spacing:0.05em;">par Jérémie Israel</div>
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;">
+                  <div style="flex:1;height:1px;background:linear-gradient(to right,rgba(180,140,0,0.4),transparent);"></div>
+                  <span style="color:var(--gold);font-size:0.55rem;">✦</span>
+                  <div style="flex:1;height:1px;background:linear-gradient(to left,rgba(180,140,0,0.4),transparent);"></div>
+                </div>
+                <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(0.92rem,2.3vw,1.06rem);color:rgba(245,237,213,0.88);line-height:1.75;margin-bottom:18px;font-style:italic;">
+                  « Le judaïsme du Second Temple à travers la recherche universitaire — une exploration rigoureuse des origines de la Mishna, croisant les sources hébraïques anciennes et les publications académiques contemporaines pour éclairer le texte d'une lumière nouvelle. »
+                </div>
+                <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(0.88rem,2.1vw,1rem);color:rgba(245,237,213,0.72);line-height:1.65;margin-bottom:20px;">
+                  Une synthèse unique entre tradition et érudition, pour comprendre la Mishna dans son contexte historique et religieux. Un ouvrage indispensable pour l'étudiant sérieux.
+                </div>
+                <!-- Bouton À paraître -->
+                <div style="display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,#2a5a2a,#1a3a1a);color:rgba(245,237,213,0.9);font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:0.28em;padding:11px 22px;border-radius:2px;text-transform:uppercase;border:1px solid rgba(180,140,0,0.4);box-shadow:0 2px 12px rgba(0,80,0,0.4);">
+                  <span style="color:var(--gold-light);font-size:0.75rem;">◈</span>
+                  <span>À paraître</span>
+                </div>
+              </div>
             </div>
-
-            <!-- 4e de couverture -->
-            <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(0.92rem,2.3vw,1.06rem);color:rgba(245,237,213,0.88);line-height:1.75;margin-bottom:18px;font-style:italic;">
-              « Les missionnaires chrétiens redoublent d'efforts pour convaincre les Juifs que Jésus est le Messie promis par la Torah. Face à eux, <em style="color:var(--parchment);font-style:normal;font-weight:600;">Les Contre-Missionnaires</em> arme chaque Juif des réponses précises qu'il lui faut : verset par verset, argument par argument, les affirmations les plus répandues sont analysées et réfutées à la lumière des sources hébraïques authentiques. »
-            </div>
-            <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(0.88rem,2.1vw,1rem);color:rgba(245,237,213,0.72);line-height:1.65;margin-bottom:20px;">
-              Un guide de référence clair, rigoureux et accessible — pour comprendre sa foi, la défendre et la transmettre avec assurance. Indispensable dans toute bibliothèque juive.
-            </div>
-
-            <!-- Bouton Amazon -->
-            <a href="https://www.amazon.fr/contre-missionnaires-J%C3%A9r%C3%A9mie-Israel/dp/B0FYQFJQRT" target="_blank" rel="noopener"
-               style="display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,var(--crimson),#7E1228);color:#fff;font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:0.22em;padding:11px 22px;border-radius:2px;text-decoration:none;text-transform:uppercase;border:1px solid rgba(255,255,255,0.15);box-shadow:0 2px 12px rgba(110,16,32,0.5);transition:filter 0.18s ease;"
-               onmouseover="this.style.filter='brightness(1.15)'"
-               onmouseout="this.style.filter=''">
-              <span>Commander sur Amazon</span>
-              <span style="font-size:1rem;opacity:0.85;">↗</span>
-            </a>
-
           </div>
-        </div>
 
-        <!-- Pied de carte -->
-        <div style="border-top:1px solid rgba(180,140,0,0.18);padding:8px 20px;text-align:center;">
-          <span style="font-family:'Cinzel',serif;font-size:0.48rem;letter-spacing:0.3em;color:rgba(201,150,10,0.5);text-transform:uppercase;">Disponible sur Amazon.fr </span>
+        </div><!-- /track -->
+
+        <!-- Indicateurs -->
+        <div class="carousel-dots">
+          <button class="carousel-dot active" onclick="booksGoTo(0)" id="booksDot0"></button>
+          <button class="carousel-dot" onclick="booksGoTo(1)" id="booksDot1"></button>
         </div>
 
       </div>
     </div>
+
+    <script>
+    (function(){
+      let booksIdx = 0;
+      const total = 2;
+      const track = document.getElementById('booksCarouselTrack');
+
+      function booksUpdate() {
+        track.style.transform = 'translateX(-' + (booksIdx * 100) + '%)';
+        for (let i = 0; i < total; i++) {
+          const dot = document.getElementById('booksDot' + i);
+          if (dot) dot.classList.toggle('active', i === booksIdx);
+        }
+      }
+
+      window.booksCarousel = function(dir) {
+        booksIdx = (booksIdx + dir + total) % total;
+        booksUpdate();
+      };
+      window.booksGoTo = function(i) {
+        booksIdx = i;
+        booksUpdate();
+      };
+
+      // Défilement automatique toutes les 6 secondes
+      setInterval(function(){ window.booksCarousel(1); }, 6000);
+    })();
+    </script>
 
     <!-- SECTION PODCAST -->
     <div class="text-section" style="margin-top:48px;">
@@ -3602,6 +3762,34 @@ function extractText(f) {
   return flat.map(t => String(t||'').replace(/<[^>]+>/g,'').trim()).filter(Boolean);
 }
 
+// Variante qui préserve les notes <i class="footnote"> sous forme d'icônes cliquables
+function extractTextWithNotes(f) {
+  if (!f) return [];
+  const flat = Array.isArray(f) ? f.flat(Infinity) : [f];
+  return flat.map(t => {
+    const raw = String(t || '').trim();
+    if (!raw) return '';
+    const parser = new DOMParser();
+    const doc = parser.parseFromString('<body>' + raw + '</body>', 'text/html');
+    const body = doc.body;
+    body.querySelectorAll('i').forEach(el => {
+      const cls = el.className || '';
+      const txt = el.textContent.trim();
+      if (cls.includes('footnote') && txt.length >= 3) {
+        const wrap = doc.createElement('span');
+        wrap.className = 'fn-wrap';
+        wrap.innerHTML = '<span class="fn-icon" onclick="this.parentNode.classList.toggle(\'fn-open\')">ℹ</span>'
+          + '<span class="fn-bubble">' + txt + '</span>';
+        el.replaceWith(wrap);
+      } else {
+        el.replaceWith(doc.createTextNode(txt));
+      }
+    });
+    body.querySelectorAll('sup').forEach(el => el.remove());
+    return body.innerHTML.trim();
+  }).filter(Boolean);
+}
+
 // Traduction automatique anglais → français (même méthode que la Halakha)
 async function md_translateToFr(text) {
   if (!text) return "";
@@ -3621,27 +3809,57 @@ async function fetchChapter(midrash, ch) {
   const ref = encodeURIComponent(`${midrash}.${ch}`);
   let he = [], fr = [], frSource = 'en';
 
-  // Tentative française (Schwab)
+  // Tentative française (Schwab) — on préserve les notes footnote
   try {
     const res = await fetch(`https://www.sefaria.org/api/texts/${ref}?context=0&ven=Le%20Talmud%20de%20J%C3%A9rusalem%2C%20traduit%20par%20Moise%20Schwab%2C%201878-1890%20%5Bfr%5D`);
     if (res.ok) {
       const data = await res.json();
       he = extractText(data.he);
-      const c = extractText(data.text);
-      if (c.some(t => t.length > 10)) { fr = c; frSource = 'fr'; }
+      const c = extractTextWithNotes(data.text);
+      if (c.some(t => t.replace(/<[^>]+>/g,'').length > 10)) { fr = c; frSource = 'fr'; }
     }
   } catch(e) {}
 
-  // Fallback anglais + traduction automatique (comme la Halakha)
-  if (!fr.some(t => t.length > 5)) {
+  // Fallback anglais + traduction automatique avec gestion des notes (comme la Halakha)
+  if (!fr.some(t => t.replace(/<[^>]+>/g,'').length > 5)) {
     try {
       const res = await fetch(`https://www.sefaria.org/api/texts/${ref}?context=0`);
       if (res.ok) {
         const data = await res.json();
         if (!he.length) he = extractText(data.he);
-        const enTexts = extractText(data.text);
-        // Traduction paragraphe par paragraphe, comme la Halakha
-        fr = await Promise.all(enTexts.map(t => md_translateToFr(t)));
+
+        const rawTexts = Array.isArray(data.text) ? data.text.flat(Infinity) : [data.text];
+        fr = await Promise.all(rawTexts.map(async (rawT) => {
+          const raw = String(rawT || '').trim();
+          if (!raw) return '';
+          const parser = new DOMParser();
+          const doc = parser.parseFromString('<body>' + raw + '</body>', 'text/html');
+          const body = doc.body;
+
+          const notes = [];
+          body.querySelectorAll('i').forEach(el => {
+            const cls = el.className || '';
+            const txt = el.textContent.trim();
+            if (cls.includes('footnote') && txt.length >= 3) {
+              const marker = `%%FN${notes.length}%%`;
+              notes.push(txt);
+              el.replaceWith(doc.createTextNode(marker));
+            } else {
+              el.replaceWith(doc.createTextNode(txt));
+            }
+          });
+          body.querySelectorAll('sup').forEach(el => el.remove());
+
+          const cleanEn = body.textContent.trim();
+          const frText = await md_translateToFr(cleanEn);
+
+          const translatedNotes = await Promise.all(notes.map(n => md_translateToFr(n)));
+          return frText.replace(/%%FN(\d+)%%/g, (_, idx) => {
+            const note = translatedNotes[parseInt(idx)] || '';
+            return '<span class="fn-wrap"><span class="fn-icon" onclick="this.parentNode.classList.toggle(\'fn-open\')">ℹ</span><span class="fn-bubble">' + note + '</span></span>';
+          });
+        }));
+        fr = fr.filter(Boolean);
         frSource = 'translated';
       }
     } catch(e) {}
@@ -3661,10 +3879,12 @@ function renderMidrash({ he, fr }) {
   const n = Math.max(he.length, fr.length);
   let html = '';
   for (let i = 0; i < n; i++) {
+    const frContent = fr[i] || '<em style="opacity:0.4">—</em>';
+    const heContent = he[i] || '<span style="opacity:0.3">—</span>';
     html += `<div class="midrash-para">
       <div class="mp-num">§ ${i+1}</div>
-      <div class="mp-he">${he[i] || '<span style="opacity:0.3">—</span>'}</div>
-      <div class="mp-fr">${fr[i] || '<em style="opacity:0.4">—</em>'}</div>
+      <div class="mp-he">${heContent}</div>
+      <div class="mp-fr">${frContent}</div>
     </div>`;
   }
   return html;
@@ -4285,28 +4505,22 @@ async function tehilim_render() {
         const heArr = Array.isArray(data.he) ? data.he : [data.he];
         const frArr = Array.isArray(data.text) ? data.text : [data.text];
 
-        let html = '<div style="display:flex;flex-direction:column;gap:22px;">';
+        let html = '';
         const total = Math.max(heArr.length, frArr.length);
 
         for (let i = 0; i < total; i++) {
             const heText = (heArr[i] || '').replace(/<[^>]+>/g, '');
             const frText = (frArr[i] || '').replace(/<[^>]+>/g, '').trim();
-
             const verseNum = entry.verseStart ? entry.verseStart + i : i + 1;
 
-            html += `
-            <div class="hk-row" style="display:grid;grid-template-columns:1fr 1fr;gap:28px;border-bottom:1px solid rgba(122,59,140,0.12);padding-bottom:18px;align-items:start;">
-                <div class="fr-text" style="font-family: inherit; font-size:1.08rem; line-height:1.65; color: inherit; text-align:justify;">
-                    <span style="color:#7A3B8C;font-weight:bold;font-size:0.78rem;font-family:'Cinzel',serif;">[${verseNum}]</span>
-                    ${frText}
-                </div>
-                <div style="font-family:'Frank Ruhl Libre',serif;font-size:1.42rem;line-height:1.75;color:#000;text-align:right;direction:rtl;">
-                    ${heText}
-                </div>
+            html += `<div class="verse-block">
+                <div class="verse-num">${verseNum}</div>
+                <div class="verse-he">${heText}</div>
+                <div class="verse-fr">${frText}</div>
             </div>`;
         }
 
-        body.innerHTML = html + '</div>';
+        body.innerHTML = html;
 
     } catch(e) {
         body.innerHTML = `<div style="text-align:center;padding:24px;color:#888;font-style:italic;">Erreur de chargement. Vérifiez votre connexion.</div>`;
@@ -4320,15 +4534,268 @@ async function tehilim_render() {
 window.th_navigate = (n) => {
     th_current.setDate(th_current.getDate() + n * 7);
     tehilim_render();
+    pv_render();
 };
 window.th_goToday = () => {
     th_current = new Date();
     th_current.setHours(0,0,0,0);
     tehilim_render();
+    pv_render();
 };
 window.th_onDatePick = (v) => {
-    if (v) { th_current = new Date(v); tehilim_render(); }
+    if (v) { th_current = new Date(v); tehilim_render(); pv_render(); }
 };
+
+ /* ═══════════════════════════════════════════════════════════════
+     JS PROVERBES — Mishlei (154 semaines, traduction française Sefaria)
+   ════════════════════════════════════════════════════════════════ */
+
+const pv_EPOCH = new Date(2026, 2, 19);
+
+const PV_SCHEDULE = [
+  [1,  1,1,  1,6,  "Proverbes 1:1–6",   "מִשְׁלֵי א:א–ו"],
+  [2,  1,7,  1,12, "Proverbes 1:7–12",  "מִשְׁלֵי א:ז–יב"],
+  [3,  1,13, 1,19, "Proverbes 1:13–19", "מִשְׁלֵי א:יג–יט"],
+  [4,  1,20, 1,27, "Proverbes 1:20–27", "מִשְׁלֵי א:כ–כז"],
+  [5,  1,28, 1,33, "Proverbes 1:28–33", "מִשְׁלֵי א:כח–לג"],
+  [6,  2,1,  2,6,  "Proverbes 2:1–6",   "מִשְׁלֵי ב:א–ו"],
+  [7,  2,7,  2,12, "Proverbes 2:7–12",  "מִשְׁלֵי ב:ז–יב"],
+  [8,  2,13, 2,18, "Proverbes 2:13–18", "מִשְׁלֵי ב:יג–יח"],
+  [9,  2,19, 2,22, "Proverbes 2:19–22", "מִשְׁלֵי ב:יט–כב"],
+  [10, 3,1,  3,6,  "Proverbes 3:1–6",   "מִשְׁלֵי ג:א–ו"],
+  [11, 3,7,  3,12, "Proverbes 3:7–12",  "מִשְׁלֵי ג:ז–יב"],
+  [12, 3,13, 3,18, "Proverbes 3:13–18", "מִשְׁלֵי ג:יג–יח"],
+  [13, 3,19, 3,26, "Proverbes 3:19–26", "מִשְׁלֵי ג:יט–כו"],
+  [14, 3,27, 3,35, "Proverbes 3:27–35", "מִשְׁלֵי ג:כז–לה"],
+  [15, 4,1,  4,6,  "Proverbes 4:1–6",   "מִשְׁלֵי ד:א–ו"],
+  [16, 4,7,  4,13, "Proverbes 4:7–13",  "מִשְׁלֵי ד:ז–יג"],
+  [17, 4,14, 4,19, "Proverbes 4:14–19", "מִשְׁלֵי ד:יד–יט"],
+  [18, 4,20, 4,27, "Proverbes 4:20–27", "מִשְׁלֵי ד:כ–כז"],
+  [19, 5,1,  5,6,  "Proverbes 5:1–6",   "מִשְׁלֵי ה:א–ו"],
+  [20, 5,7,  5,14, "Proverbes 5:7–14",  "מִשְׁלֵי ה:ז–יד"],
+  [21, 5,15, 5,20, "Proverbes 5:15–20", "מִשְׁלֵי ה:טו–כ"],
+  [22, 5,21, 5,23, "Proverbes 5:21–23", "מִשְׁלֵי ה:כא–כג"],
+  [23, 6,1,  6,5,  "Proverbes 6:1–5",   "מִשְׁלֵי ו:א–ה"],
+  [24, 6,6,  6,11, "Proverbes 6:6–11",  "מִשְׁלֵי ו:ו–יא"],
+  [25, 6,12, 6,19, "Proverbes 6:12–19", "מִשְׁלֵי ו:יב–יט"],
+  [26, 6,20, 6,26, "Proverbes 6:20–26", "מִשְׁלֵי ו:כ–כו"],
+  [27, 6,27, 6,35, "Proverbes 6:27–35", "מִשְׁלֵי ו:כז–לה"],
+  [28, 7,1,  7,5,  "Proverbes 7:1–5",   "מִשְׁלֵי ז:א–ה"],
+  [29, 7,6,  7,12, "Proverbes 7:6–12",  "מִשְׁלֵי ז:ו–יב"],
+  [30, 7,13, 7,20, "Proverbes 7:13–20", "מִשְׁלֵי ז:יג–כ"],
+  [31, 7,21, 7,27, "Proverbes 7:21–27", "מִשְׁלֵי ז:כא–כז"],
+  [32, 8,1,  8,6,  "Proverbes 8:1–6",   "מִשְׁלֵי ח:א–ו"],
+  [33, 8,7,  8,13, "Proverbes 8:7–13",  "מִשְׁלֵי ח:ז–יג"],
+  [34, 8,14, 8,21, "Proverbes 8:14–21", "מִשְׁלֵי ח:יד–כא"],
+  [35, 8,22, 8,29, "Proverbes 8:22–29", "מִשְׁלֵי ח:כב–כט"],
+  [36, 8,30, 8,36, "Proverbes 8:30–36", "מִשְׁלֵי ח:ל–לו"],
+  [37, 9,1,  9,6,  "Proverbes 9:1–6",   "מִשְׁלֵי ט:א–ו"],
+  [38, 9,7,  9,12, "Proverbes 9:7–12",  "מִשְׁלֵי ט:ז–יב"],
+  [39, 9,13, 9,18, "Proverbes 9:13–18", "מִשְׁלֵי ט:יג–יח"],
+  [40, 10,1,  10,7,  "Proverbes 10:1–7",   "מִשְׁלֵי י:א–ז"],
+  [41, 10,8,  10,14, "Proverbes 10:8–14",  "מִשְׁלֵי י:ח–יד"],
+  [42, 10,15, 10,21, "Proverbes 10:15–21", "מִשְׁלֵי י:טו–כא"],
+  [43, 10,22, 10,27, "Proverbes 10:22–27", "מִשְׁלֵי י:כב–כז"],
+  [44, 10,28, 10,32, "Proverbes 10:28–32", "מִשְׁלֵי י:כח–לב"],
+  [45, 11,1,  11,6,  "Proverbes 11:1–6",   "מִשְׁלֵי יא:א–ו"],
+  [46, 11,7,  11,13, "Proverbes 11:7–13",  "מִשְׁלֵי יא:ז–יג"],
+  [47, 11,14, 11,20, "Proverbes 11:14–20", "מִשְׁלֵי יא:יד–כ"],
+  [48, 11,21, 11,26, "Proverbes 11:21–26", "מִשְׁלֵי יא:כא–כו"],
+  [49, 11,27, 11,31, "Proverbes 11:27–31", "מִשְׁלֵי יא:כז–לא"],
+  [50, 12,1,  12,6,  "Proverbes 12:1–6",   "מִשְׁלֵי יב:א–ו"],
+  [51, 12,7,  12,12, "Proverbes 12:7–12",  "מִשְׁלֵי יב:ז–יב"],
+  [52, 12,13, 12,19, "Proverbes 12:13–19", "מִשְׁלֵי יב:יג–יט"],
+  [53, 12,20, 12,25, "Proverbes 12:20–25", "מִשְׁלֵי יב:כ–כה"],
+  [54, 12,26, 12,28, "Proverbes 12:26–28", "מִשְׁלֵי יב:כו–כח"],
+  [55, 13,1,  13,6,  "Proverbes 13:1–6",   "מִשְׁלֵי יג:א–ו"],
+  [56, 13,7,  13,13, "Proverbes 13:7–13",  "מִשְׁלֵי יג:ז–יג"],
+  [57, 13,14, 13,20, "Proverbes 13:14–20", "מִשְׁלֵי יג:יד–כ"],
+  [58, 13,21, 13,25, "Proverbes 13:21–25", "מִשְׁלֵי יג:כא–כה"],
+  [59, 14,1,  14,6,  "Proverbes 14:1–6",   "מִשְׁלֵי יד:א–ו"],
+  [60, 14,7,  14,13, "Proverbes 14:7–13",  "מִשְׁלֵי יד:ז–יג"],
+  [61, 14,14, 14,20, "Proverbes 14:14–20", "מִשְׁלֵי יד:יד–כ"],
+  [62, 14,21, 14,27, "Proverbes 14:21–27", "מִשְׁלֵי יד:כא–כז"],
+  [63, 14,28, 14,35, "Proverbes 14:28–35", "מִשְׁלֵי יד:כח–לה"],
+  [64, 15,1,  15,7,  "Proverbes 15:1–7",   "מִשְׁלֵי טו:א–ז"],
+  [65, 15,8,  15,14, "Proverbes 15:8–14",  "מִשְׁלֵי טו:ח–יד"],
+  [66, 15,15, 15,21, "Proverbes 15:15–21", "מִשְׁלֵי טו:טו–כא"],
+  [67, 15,22, 15,28, "Proverbes 15:22–28", "מִשְׁלֵי טו:כב–כח"],
+  [68, 15,29, 15,33, "Proverbes 15:29–33", "מִשְׁלֵי טו:כט–לג"],
+  [69, 16,1,  16,7,  "Proverbes 16:1–7",   "מִשְׁלֵי טז:א–ז"],
+  [70, 16,8,  16,14, "Proverbes 16:8–14",  "מִשְׁלֵי טז:ח–יד"],
+  [71, 16,15, 16,21, "Proverbes 16:15–21", "מִשְׁלֵי טז:טו–כא"],
+  [72, 16,22, 16,28, "Proverbes 16:22–28", "מִשְׁלֵי טז:כב–כח"],
+  [73, 16,29, 16,33, "Proverbes 16:29–33", "מִשְׁלֵי טז:כט–לג"],
+  [74, 17,1,  17,6,  "Proverbes 17:1–6",   "מִשְׁלֵי יז:א–ו"],
+  [75, 17,7,  17,12, "Proverbes 17:7–12",  "מִשְׁלֵי יז:ז–יב"],
+  [76, 17,13, 17,18, "Proverbes 17:13–18", "מִשְׁלֵי יז:יג–יח"],
+  [77, 17,19, 17,24, "Proverbes 17:19–24", "מִשְׁלֵי יז:יט–כד"],
+  [78, 17,25, 17,28, "Proverbes 17:25–28", "מִשְׁלֵי יז:כה–כח"],
+  [79, 18,1,  18,6,  "Proverbes 18:1–6",   "מִשְׁלֵי יח:א–ו"],
+  [80, 18,7,  18,12, "Proverbes 18:7–12",  "מִשְׁלֵי יח:ז–יב"],
+  [81, 18,13, 18,19, "Proverbes 18:13–19", "מִשְׁלֵי יח:יג–יט"],
+  [82, 18,20, 18,24, "Proverbes 18:20–24", "מִשְׁלֵי יח:כ–כד"],
+  [83, 19,1,  19,6,  "Proverbes 19:1–6",   "מִשְׁלֵי יט:א–ו"],
+  [84, 19,7,  19,12, "Proverbes 19:7–12",  "מִשְׁלֵי יט:ז–יב"],
+  [85, 19,13, 19,18, "Proverbes 19:13–18", "מִשְׁלֵי יט:יג–יח"],
+  [86, 19,19, 19,24, "Proverbes 19:19–24", "מִשְׁלֵי יט:יט–כד"],
+  [87, 19,25, 19,29, "Proverbes 19:25–29", "מִשְׁלֵי יט:כה–כט"],
+  [88, 20,1,  20,6,  "Proverbes 20:1–6",   "מִשְׁלֵי כ:א–ו"],
+  [89, 20,7,  20,12, "Proverbes 20:7–12",  "מִשְׁלֵי כ:ז–יב"],
+  [90, 20,13, 20,18, "Proverbes 20:13–18", "מִשְׁלֵי כ:יג–יח"],
+  [91, 20,19, 20,24, "Proverbes 20:19–24", "מִשְׁלֵי כ:יט–כד"],
+  [92, 20,25, 20,30, "Proverbes 20:25–30", "מִשְׁלֵי כ:כה–ל"],
+  [93, 21,1,  21,6,  "Proverbes 21:1–6",   "מִשְׁלֵי כא:א–ו"],
+  [94, 21,7,  21,13, "Proverbes 21:7–13",  "מִשְׁלֵי כא:ז–יג"],
+  [95, 21,14, 21,20, "Proverbes 21:14–20", "מִשְׁלֵי כא:יד–כ"],
+  [96, 21,21, 21,26, "Proverbes 21:21–26", "מִשְׁלֵי כא:כא–כו"],
+  [97, 21,27, 21,31, "Proverbes 21:27–31", "מִשְׁלֵי כא:כז–לא"],
+  [98,  22,1,  22,6,  "Proverbes 22:1–6",   "מִשְׁלֵי כב:א–ו"],
+  [99,  22,7,  22,12, "Proverbes 22:7–12",  "מִשְׁלֵי כב:ז–יב"],
+  [100, 22,13, 22,18, "Proverbes 22:13–18", "מִשְׁלֵי כב:יג–יח"],
+  [101, 22,19, 22,24, "Proverbes 22:19–24", "מִשְׁלֵי כב:יט–כד"],
+  [102, 22,25, 22,29, "Proverbes 22:25–29", "מִשְׁלֵי כב:כה–כט"],
+  [103, 23,1,  23,6,  "Proverbes 23:1–6",   "מִשְׁלֵי כג:א–ו"],
+  [104, 23,7,  23,12, "Proverbes 23:7–12",  "מִשְׁלֵי כג:ז–יב"],
+  [105, 23,13, 23,19, "Proverbes 23:13–19", "מִשְׁלֵי כג:יג–יט"],
+  [106, 23,20, 23,26, "Proverbes 23:20–26", "מִשְׁלֵי כג:כ–כו"],
+  [107, 23,27, 23,35, "Proverbes 23:27–35", "מִשְׁלֵי כג:כז–לה"],
+  [108, 24,1,  24,6,  "Proverbes 24:1–6",   "מִשְׁלֵי כד:א–ו"],
+  [109, 24,7,  24,12, "Proverbes 24:7–12",  "מִשְׁלֵי כד:ז–יב"],
+  [110, 24,13, 24,18, "Proverbes 24:13–18", "מִשְׁלֵי כד:יג–יח"],
+  [111, 24,19, 24,25, "Proverbes 24:19–25", "מִשְׁלֵי כד:יט–כה"],
+  [112, 24,26, 24,34, "Proverbes 24:26–34", "מִשְׁלֵי כד:כו–לד"],
+  [113, 25,1,  25,7,  "Proverbes 25:1–7",   "מִשְׁלֵי כה:א–ז"],
+  [114, 25,8,  25,14, "Proverbes 25:8–14",  "מִשְׁלֵי כה:ח–יד"],
+  [115, 25,15, 25,22, "Proverbes 25:15–22", "מִשְׁלֵי כה:טו–כב"],
+  [116, 25,23, 25,28, "Proverbes 25:23–28", "מִשְׁלֵי כה:כג–כח"],
+  [117, 26,1,  26,6,  "Proverbes 26:1–6",   "מִשְׁלֵי כו:א–ו"],
+  [118, 26,7,  26,12, "Proverbes 26:7–12",  "מִשְׁלֵי כו:ז–יב"],
+  [119, 26,13, 26,19, "Proverbes 26:13–19", "מִשְׁלֵי כו:יג–יט"],
+  [120, 26,20, 26,28, "Proverbes 26:20–28", "מִשְׁלֵי כו:כ–כח"],
+  [121, 27,1,  27,7,  "Proverbes 27:1–7",   "מִשְׁלֵי כז:א–ז"],
+  [122, 27,8,  27,14, "Proverbes 27:8–14",  "מִשְׁלֵי כז:ח–יד"],
+  [123, 27,15, 27,22, "Proverbes 27:15–22", "מִשְׁלֵי כז:טו–כב"],
+  [124, 27,23, 27,27, "Proverbes 27:23–27", "מִשְׁלֵי כז:כג–כז"],
+  [125, 28,1,  28,6,  "Proverbes 28:1–6",   "מִשְׁלֵי כח:א–ו"],
+  [126, 28,7,  28,12, "Proverbes 28:7–12",  "מִשְׁלֵי כח:ז–יב"],
+  [127, 28,13, 28,18, "Proverbes 28:13–18", "מִשְׁלֵי כח:יג–יח"],
+  [128, 28,19, 28,24, "Proverbes 28:19–24", "מִשְׁלֵי כח:יט–כד"],
+  [129, 28,25, 28,28, "Proverbes 28:25–28", "מִשְׁלֵי כח:כה–כח"],
+  [130, 29,1,  29,7,  "Proverbes 29:1–7",   "מִשְׁלֵי כט:א–ז"],
+  [131, 29,8,  29,14, "Proverbes 29:8–14",  "מִשְׁלֵי כט:ח–יד"],
+  [132, 29,15, 29,21, "Proverbes 29:15–21", "מִשְׁלֵי כט:טו–כא"],
+  [133, 29,22, 29,27, "Proverbes 29:22–27", "מִשְׁלֵי כט:כב–כז"],
+  [134, 30,1,  30,6,  "Proverbes 30:1–6",   "מִשְׁלֵי ל:א–ו"],
+  [135, 30,7,  30,14, "Proverbes 30:7–14",  "מִשְׁלֵי ל:ז–יד"],
+  [136, 30,15, 30,20, "Proverbes 30:15–20", "מִשְׁלֵי ל:טו–כ"],
+  [137, 30,21, 30,28, "Proverbes 30:21–28", "מִשְׁלֵי ל:כא–כח"],
+  [138, 30,29, 30,33, "Proverbes 30:29–33", "מִשְׁלֵי ל:כט–לג"],
+  [139, 31,1,  31,4,  "Proverbes 31:1–4",   "מִשְׁלֵי לא:א–ד"],
+  [140, 31,5,  31,9,  "Proverbes 31:5–9",   "מִשְׁלֵי לא:ה–ט"],
+  [141, 31,10, 31,16, "Proverbes 31:10–16", "מִשְׁלֵי לא:י–טז"],
+  [142, 31,17, 31,22, "Proverbes 31:17–22", "מִשְׁלֵי לא:יז–כב"],
+  [143, 31,23, 31,31, "Proverbes 31:23–31", "מִשְׁלֵי לא:כג–לא"],
+  [144, 1,1,  1,6,  "Proverbes 1:1–6 ✦",   "מִשְׁלֵי א:א–ו"],
+  [145, 1,7,  1,14, "Proverbes 1:7–14",    "מִשְׁלֵי א:ז–יד"],
+  [146, 1,15, 1,22, "Proverbes 1:15–22",   "מִשְׁלֵי א:טו–כב"],
+  [147, 1,23, 1,33, "Proverbes 1:23–33",   "מִשְׁלֵי א:כג–לג"],
+  [148, 2,1,  2,9,  "Proverbes 2:1–9",     "מִשְׁלֵי ב:א–ט"],
+  [149, 2,10, 2,22, "Proverbes 2:10–22",   "מִשְׁלֵי ב:י–כב"],
+  [150, 3,1,  3,10, "Proverbes 3:1–10",    "מִשְׁלֵי ג:א–י"],
+  [151, 3,11, 3,20, "Proverbes 3:11–20",   "מִשְׁלֵי ג:יא–כ"],
+  [152, 3,21, 3,35, "Proverbes 3:21–35",   "מִשְׁלֵי ג:כא–לה"],
+  [153, 4,1,  4,13, "Proverbes 4:1–13",    "מִשְׁלֵי ד:א–יג"],
+  [154, 4,14, 4,27, "Proverbes 4:14–27",   "מִשְׁלֵי ד:יד–כז"],
+];
+
+function pv_getWeekInfo(date) {
+  const days = Math.floor((date - pv_EPOCH) / 86400000);
+  const totalWeeks = Math.floor(days / 7);
+  const idx = ((totalWeeks % 154) + 154) % 154;
+  return { idx, weekInCycle: idx + 1 };
+}
+
+const pv_cache = {};
+
+async function pv_loadText(idx) {
+  if (pv_cache[idx]) return pv_cache[idx];
+  const [, chDeb, vDeb, chFin, vFin] = PV_SCHEDULE[idx];
+
+  let ref;
+  if (chDeb === chFin) {
+    ref = vDeb === vFin ? `Proverbs.${chDeb}.${vDeb}` : `Proverbs.${chDeb}.${vDeb}-${vFin}`;
+  } else {
+    ref = `Proverbs.${chDeb}.${vDeb}-${chFin}.${vFin}`;
+  }
+
+  try {
+    const url = `https://www.sefaria.org/api/texts/${encodeURIComponent(ref)}?context=0&ven=Bible%20du%20Rabbinat%201899%20%5Bfr%5D`;
+    const res = await fetch(url);
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+
+    const flatten = (arr) => {
+      if (!arr) return [];
+      if (!Array.isArray(arr)) return [String(arr)];
+      if (arr.length > 0 && Array.isArray(arr[0])) return arr.flat(Infinity);
+      return arr;
+    };
+
+    const heArr = flatten(data.he);
+    const frArr = flatten(data.text);
+    const lang = frArr.some(t => t && t.trim().length > 5) ? 'fr' : 'en';
+
+    const result = { heArr, frArr, lang, chDeb, vDeb };
+    pv_cache[idx] = result;
+    return result;
+  } catch(e) {
+    return null;
+  }
+}
+
+function pv_renderVerses({ heArr, frArr, chDeb, vDeb }) {
+  const n = Math.max(heArr.length, frArr.length);
+  if (!n) return '<div class="text-error">Texte non disponible.</div>';
+  let html = `<div class="chapter-head" style="color:#5C7A30;border-color:rgba(92,122,48,0.3);">— Chapitre ${chDeb} —</div>`;
+  for (let i = 0; i < n; i++) {
+    const heText = (heArr[i] || '').replace(/<[^>]+>/g, '');
+    const frText = (frArr[i] || '').replace(/<[^>]+>/g, '');
+    html += `<div class="verse-block">
+      <div class="verse-num">${vDeb + i}</div>
+      <div class="verse-he">${heText}</div>
+      <div class="verse-fr">${frText}</div>
+    </div>`;
+  }
+  return html;
+}
+
+async function pv_render() {
+  const { idx, weekInCycle } = pv_getWeekInfo(th_current);
+  const entry = PV_SCHEDULE[idx];
+  const [, chDeb, vDeb, chFin, vFin, labelFr, labelHeb] = entry;
+
+  document.getElementById('pv_weekLabel').textContent = `Semaine ${weekInCycle} du cycle`;
+  document.getElementById('pv_ref').innerHTML = `<span style="color:#3D6020;font-weight:600;">${labelFr}</span>`;
+  document.getElementById('pv_refHeb').textContent = labelHeb;
+  document.getElementById('pv_progressFill').style.width = (idx / 153 * 100).toFixed(1) + '%';
+  document.getElementById('pv_progressLabel').textContent = `Semaine ${weekInCycle} / 154`;
+  document.getElementById('pv_textTitle').textContent = labelFr;
+
+  const body = document.getElementById('pv_textBody');
+  body.innerHTML = `<div class="text-loading"><div class="spinner"></div><div class="loading-text">Chargement depuis Sefaria…</div></div>`;
+
+  const result = await pv_loadText(idx);
+  if (!result) {
+    body.innerHTML = `<div class="text-error">⚠️ Impossible de charger le texte. Vérifiez votre connexion.</div>`;
+    document.getElementById('pv_langBadge').textContent = 'Erreur';
+    return;
+  }
+
+  document.getElementById('pv_langBadge').textContent =
+    result.lang === 'fr' ? '🇫🇷 Hébreu + Français' : '🇬🇧 Hébreu + Anglais';
+  body.innerHTML = pv_renderVerses(result);
+}
 
  /* ═══════════════════════════════════════════════════════════════
      JS HALAKHA — Mishné Torah (Hébreu & Français Direct)
@@ -4587,6 +5054,7 @@ window.halakha_onDatePick = (v) => {
 // 6. LANCEMENT
 document.addEventListener('DOMContentLoaded', halakha_render);
 document.addEventListener('DOMContentLoaded', tehilim_render);
+document.addEventListener('DOMContentLoaded', pv_render);
 
  torah_render();
 
