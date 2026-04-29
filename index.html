@@ -892,8 +892,7 @@
     body.tab-prophet { --bg: #060C12; --crimson: #1B4E6E; --card-shadow: 0 0 0 1px rgba(0,140,180,0.15), 0 4px 32px rgba(0,0,0,0.7); background-image: radial-gradient(ellipse 70% 50% at 30% 10%, rgba(0,40,90,0.3) 0%, transparent 70%), radial-gradient(ellipse 50% 60% at 75% 85%, rgba(0,30,70,0.25) 0%, transparent 70%); }
     body.tab-mishna  { --bg: #090B14; --card-shadow: 0 0 0 1px rgba(100,140,200,0.2), 0 4px 32px rgba(0,0,0,0.75); background-image: radial-gradient(ellipse 70% 50% at 25% 10%, rgba(20,50,120,0.35) 0%, transparent 70%), radial-gradient(ellipse 50% 60% at 80% 85%, rgba(10,30,80,0.28) 0%, transparent 70%); }
     body.tab-midrash { --bg: #100408; --card-shadow: 0 0 0 1px rgba(180,40,60,0.15), 0 4px 32px rgba(0,0,0,0.75); background-image: radial-gradient(ellipse 70% 50% at 20% 10%, rgba(110,16,32,0.3) 0%, transparent 70%), radial-gradient(ellipse 50% 60% at 80% 85%, rgba(80,10,20,0.22) 0%, transparent 70%), radial-gradient(ellipse 40% 40% at 60% 30%, rgba(160,120,0,0.08) 0%, transparent 60%); }
-    body.tab-halakha { --bg: #100A00; --card-shadow: 0 0 0 1px rgba(139,105,20,0.2), 0 4px 32px rgba(0,0,0,0.7); background-image: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(100,70,0,0.3) 0%, transparent 70%); }
-    body.tab-accueil { --bg: #0D0710; --crimson: #7A3B8C; --card-shadow: 0 0 0 1px rgba(122,59,140,0.2), 0 4px 32px rgba(0,0,0,0.75); background-image: radial-gradient(ellipse 70% 50% at 30% 10%, rgba(80,20,100,0.35) 0%, transparent 70%), radial-gradient(ellipse 50% 60% at 75% 85%, rgba(50,10,70,0.28) 0%, transparent 70%); }
+      body.tab-accueil { --bg: #0D0710; --crimson: #7A3B8C; --card-shadow: 0 0 0 1px rgba(122,59,140,0.2), 0 4px 32px rgba(0,0,0,0.75); background-image: radial-gradient(ellipse 70% 50% at 30% 10%, rgba(80,20,100,0.35) 0%, transparent 70%), radial-gradient(ellipse 50% 60% at 75% 85%, rgba(50,10,70,0.28) 0%, transparent 70%); }
     body.tab-talmud  { --bg: #07100A; --card-shadow: 0 0 0 1px rgba(30,110,60,0.2), 0 4px 32px rgba(0,0,0,0.75); background-image: radial-gradient(ellipse 70% 50% at 30% 10%, rgba(10,80,35,0.35) 0%, transparent 70%), radial-gradient(ellipse 50% 60% at 75% 85%, rgba(5,50,20,0.28) 0%, transparent 70%); }
 
     body {
@@ -955,7 +954,7 @@
       background: var(--gold);
       border-radius: 2px;
     }
-    body.tab-halakha .tab-btn.active::after { background: #8B6914; }           /* or ancien */
+ 
     body.tab-talmud  .tab-btn.active::after { background: #1E6E3C; }           /* vert talmud */
     body.tab-torah   .tab-btn.active::after { background: #C9960A; }           /* or        */
     body.tab-prophet .tab-btn.active::after { background: #4A8C35; }           /* vert vif  */
@@ -1321,15 +1320,7 @@
     body.tab-midrash .ch-tab.active { background: var(--crimson); color: #fff; border-color: var(--crimson); }
     body.tab-midrash .spinner { border-top-color: var(--crimson-light); }
 
-    /* ── Halakha ── */
-    body.tab-halakha .card { border: 1.5px solid rgba(139,105,20,0.5); }
-    body.tab-halakha .nav-btn { background: rgba(100,70,0,0.12); border: 1px solid rgba(139,105,20,0.35); color: var(--ink); }
-    body.tab-halakha .nav-btn:hover { background: rgba(139,105,20,0.25); color: var(--ink); }
-    body.tab-halakha .date-input { background: var(--parchment); border: 1px solid rgba(139,105,20,0.35); color: var(--ink); color-scheme: light; }
-    body.tab-halakha .date-input:focus { border-color: var(--gold); }
-    body.tab-halakha .nav-btn.today { background: #8B6914; color: var(--parchment); border-color: #C9960A; }
-    body.tab-halakha .nav-btn.today:hover { background: #A67C00; }
-    body.tab-halakha footer { color: rgba(245,237,213,0.22); }
+   
 
     /* ── Talmud ── */
     body.tab-talmud .card { border: 1.5px solid rgba(30,110,60,0.5); }
@@ -1709,9 +1700,7 @@
       <span class="tab-heb">מִשְׁנָה</span>Mishna
     </button>
   
-    <button class="tab-btn" onclick="switchTab('halakha')" id="tab-halakha">
-      <span class="tab-heb">הֲלָכָה</span>Halakha
-    </button>
+
     <button class="tab-btn" onclick="switchTab('talmud')" id="tab-talmud">
       <span class="tab-heb">תַּלְמוּד</span>Talmud
     </button>
@@ -2372,91 +2361,6 @@
   </div>
 
 
-  <!-- PANNEAU HALAKHA -->
-  <div class="tab-panel" id="panel-halakha">
-
-    <header>
-      <div class="heb-title">מִשְׁנֵה תּוֹרָה</div>
-      <div class="star-row">✦ &nbsp; ✦ &nbsp; ✦</div>
-      <div class="lat-title">Halakha · Un Chapitre par Jour — Cycle Triennal</div>
-    </header>
-
-    <div class="card" id="hk_mainCard">
-
-      <div class="week-row">
-        <div class="week-line"></div>
-        <div class="week-label" id="hk_weekLabel">—</div>
-        <div class="week-line"></div>
-      </div>
-
-      <div class="seder-center">
-        <div class="seder-big" id="hk_dayNum" style="font-size:clamp(5rem,18vw,9rem);font-weight:700;line-height:1;color:var(--ink);">—</div>
-        <div class="seder-sub" style="font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:0.4em;color:var(--ink-light);text-transform:uppercase;">Jour du Cycle · יוֹם</div>
-      </div>
-
-      <div class="date-info" id="hk_dateInfo">—</div>
-
-      <div class="divider"><div class="div-line"></div><div class="div-gem">✦</div><div class="div-line"></div></div>
-
-      <div style="margin-bottom:18px;text-align:center;">
-        <div class="section-tag" style="font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.38em;color:#8B6914;text-transform:uppercase;margin-bottom:8px;">Mishné Torah · מַיְמוֹנִידֶס</div>
-        <div id="hk_chapterRef" style="font-size:clamp(1.3rem,4vw,2rem);font-weight:600;color:var(--ink);line-height:1.3;">—</div>
-        <div id="hk_chapterHeb" style="font-family:'Frank Ruhl Libre',serif;font-size:clamp(1rem,3vw,1.4rem);color:var(--ink-light);direction:rtl;margin-top:4px;">—</div>
-      </div>
-
-      <div class="divider"><div class="div-line"></div><div class="div-gem">◆</div><div class="div-line"></div></div>
-
-      <!-- Zone de lecture — Sefaria API + lien Chabad pour la traduction -->
-      <div class="text-section" style="margin-top:16px;">
-        <div class="text-card">
-          <div class="text-header">
-            <div class="text-header-title">Mishné Torah · Texte hébreu &amp; français</div>
-            <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;">
-              <span id="hk_langBadge" class="lang-badge">⟳</span>
-              <a id="hk_externalLink" href="#" target="_blank" rel="noopener"
-                 style="font-family:'Cinzel',serif;font-size:0.52rem;letter-spacing:0.12em;color:rgba(180,140,0,0.9);text-decoration:none;background:rgba(180,140,0,0.1);border:1px solid rgba(180,140,0,0.35);padding:5px 12px;border-radius:2px;white-space:nowrap;">
-                🇫🇷 Chabad.org ↗
-              </a>
-            </div>
-          </div>
-          <div id="hk_textBody" class="text-body">
-            <div class="text-loading"><div class="spinner"></div><div class="loading-text">Chargement depuis Sefaria…</div></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Barre de progression -->
-      <div class="progress-wrap" style="margin-top:16px;">
-        <div class="progress-labels">
-          <span>Jour 1</span>
-          <span id="hk_progressLabel">Jour — / 1000</span>
-          <span>Jour 1000</span>
-        </div>
-        <div class="progress-bar">
-          <div class="progress-fill" id="hk_progressFill" style="width:0%;background:linear-gradient(to right,#5C3D00,#C9960A);"></div>
-        </div>
-      </div>
-
-      <!-- Navigation -->
-      <div class="nav-row" style="margin-top:18px;">
-        <button class="nav-btn" onclick="halakha_navigate(-7)">◂◂ −7j</button>
-        <button class="nav-btn" onclick="halakha_navigate(-1)">◂ Hier</button>
-        <button class="nav-btn today" onclick="halakha_goToday()">Aujourd'hui</button>
-        <button class="nav-btn" onclick="halakha_navigate(1)">Demain ▸</button>
-        <button class="nav-btn" onclick="halakha_navigate(7)">+7j ▸▸</button>
-      </div>
-      <div class="date-row" style="margin-top:10px;">
-        <input type="date" class="date-input" id="hk_datePicker" onchange="halakha_onDatePick(this.value)">
-        <button class="nav-btn" style="margin:0" onclick="halakha_onDatePick(document.getElementById('hk_datePicker').value)">Aller</button>
-      </div>
-
-    </div><!-- /card -->
-
-    <footer style="margin-top:42px;text-align:center;color:rgba(245,237,213,0.22);font-size:0.72rem;font-style:italic;letter-spacing:0.12em;padding-bottom:20px;">
-      Texte fourni par fr.chabad.org · Moznaim Publications
-    </footer>
-
-  </div><!-- /panel-halakha -->
 
 
   <!-- ═══════════════════════════════════════════════════════
@@ -2652,7 +2556,7 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
       if (tab === 'torah')   torah_render(true);
       if (tab === 'prophet') prophet_render(true);
-      if (tab === 'halakha') halakha_render();
+   
       if (tab === 'mishna')  mishna_render(true);
       if (tab === 'midrash') midrash_render(true);
       if (tab === 'accueil') tehilim_render();
@@ -4007,17 +3911,6 @@ function extractTextWithNotes(f) {
   }).filter(Boolean);
 }
 
-// Traduction automatique anglais → français (même méthode que la Halakha)
-async function md_translateToFr(text) {
-  if (!text) return "";
-  try {
-    const res = await fetch("https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=fr&dt=t&q=" + encodeURIComponent(text));
-    const data = await res.json();
-    return data[0].map(item => item[0]).join('');
-  } catch(e) {
-    return text; // Retourne l'anglais en cas d'erreur
-  }
-}
 
 async function fetchChapter(midrash, ch) {
   const key = `${midrash}.${ch}`;
@@ -5013,279 +4906,6 @@ async function pv_render() {
     result.lang === 'fr' ? '🇫🇷 Hébreu + Français' : '🇬🇧 Hébreu + Anglais';
   body.innerHTML = pv_renderVerses(result);
 }
-
- /* ═══════════════════════════════════════════════════════════════
-     JS HALAKHA — Mishné Torah (Hébreu & Français Direct)
-     Système : Sefaria + Traduction Auto Intégrée
-   ════════════════════════════════════════════════════════════════ */
-
-// 1. VARIABLES DE NAVIGATION (Globales pour éviter le ReferenceError)
-let hk_current = new Date();
-hk_current.setHours(0,0,0,0);
-const hk_EPOCH = new Date(2026, 2, 19);
-const hk_TOTAL = 1000;
-
-// 2. STRUCTURE DES TRAITÉS
-const HILKHOT = [
-    ["Hilkhot Yessodei haTorah",10],["Hilkhot Deot",7],["Hilkhot Talmud Torah",7],
-    ["Hilkhot Avodat Kokhavim",12],["Hilkhot Teshouva",10],
-    ["Hilkhot Keriat Shema",4],["Hilkhot Tefila",15],["Hilkhot Tefilin",10],
-    ["Hilkhot Mezouza",6],["Hilkhot Sefer Torah",10],["Hilkhot Tzitzit",3],
-    ["Hilkhot Berakhot",11],["Hilkhot Mila",3],
-    ["Hilkhot Shabbat",30],["Hilkhot Eruvin",8],["Hilkhot Shevissat Assor",3],
-    ["Hilkhot Shevissat Yom Tov",8],["Hilkhot Hametz oumatzah",8],
-    ["Hilkhot Shofar Soukkah Loulav",8],["Hilkhot Shekalim",4],
-    ["Hilkhot Kiddoush haMeah",5],["Hilkhot Taaniyot",5],
-    ["Hilkhot Meguila veChanoukkah",4],
-    ["Hilkhot Ishout",25],["Hilkhot Gueroushim",13],["Hilkhot Yibboum veChalitza",8],
-    ["Hilkhot Naara Betoula",3],["Hilkhot Sota",4],
-    ["Hilkhot Issoure Bia",22],["Hilkhot Maakhalot Asourot",17],["Hilkhot Shechita",14],
-    ["Hilkhot Shvouot",12],["Hilkhot Nedarim",13],["Hilkhot Nezirout",10],
-    ["Hilkhot Aroukhin veHaramin",8],
-    ["Hilkhot Kilaim",7],["Hilkhot Matnot Aniyyim",10],["Hilkhot Teroumat",15],
-    ["Hilkhot Maasser",14],["Hilkhot Maasser Sheni",11],["Hilkhot Bikkourim",12],
-    ["Hilkhot Shemita veYovel",13],
-    ["Hilkhot Beit haBechira",8],["Hilkhot Kelei haMikdash",10],
-    ["Hilkhot Biiat haMikdash",9],["Hilkhot Issoure haMizbeach",7],
-    ["Hilkhot Maasei haKorbanot",19],["Hilkhot Temidin ouMoussafim",10],
-    ["Hilkhot Pessoule haMoukdashim",19],
-    ["Hilkhot Korban Pesah",9],["Hilkhot Chagiga",3],["Hilkhot Bekhorot",8],
-    ["Hilkhot Shegagot",15],["Hilkhot Mehoussar Kappara",5],["Hilkhot Temouraa",14],
-    ["Hilkhot Toumat Met",25],["Hilkhot Para Adouma",15],["Hilkhot Toumat Tzaraat",16],
-    ["Hilkhot Zav",13],["Hilkhot Toumaot",20],
-    ["Hilkhot Toumat Okhlin",16],["Hilkhot Keilim",28],["Hilkhot Mikvaot",11],
-    ["Hilkhot Nizkei Mammon",14],["Hilkhot Gneiva",9],["Hilkhot Guezela vaAveda",18],
-    ["Hilkhot Hovel ouMazik",8],["Hilkhot Rotzeah",13],
-    ["Hilkhot Mekhira",30],["Hilkhot Zekhiya ouMattana",12],["Hilkhot Shekhenim",14],
-    ["Hilkhot Shelouhin veShoutafin",10],["Hilkhot Avadim",9],
-    ["Hilkhot Skhirout",13],["Hilkhot Shoeil ouFikadon",10],["Hilkhot Malve veLove",27],
-    ["Hilkhot Toan veniTan",16],["Hilkhot Nakhalot",11],
-    ["Hilkhot Sanhedrin",26],["Hilkhot Edout",22],["Hilkhot Mamrim",7],
-    ["Hilkhot Evel",14],["Hilkhot Melakhim ouMilhamot",12],
-];
-
-const HILKHOT_SEFARIA = {
-    "Hilkhot Yessodei haTorah": ["Mishneh_Torah,_Foundations_of_the_Torah", 0],
-    "Hilkhot Deot": ["Mishneh_Torah,_Human_Dispositions", 0],
-    "Hilkhot Talmud Torah": ["Mishneh_Torah,_Torah_Study", 0],
-    "Hilkhot Avodat Kokhavim": ["Mishneh_Torah,_Foreign_Worship_and_Customs_of_the_Nations", 0],
-    "Hilkhot Teshouva": ["Mishneh_Torah,_Repentance", 0],
-    "Hilkhot Keriat Shema": ["Mishneh_Torah,_Recitation_of_Shema", 0],
-    "Hilkhot Tefila": ["Mishneh_Torah,_Prayer_and_the_Priestly_Blessing", 0],
-    "Hilkhot Tefilin": ["Mishneh_Torah,_Tefillin,_Mezuzah_and_the_Torah_Scroll", 0],
-    "Hilkhot Mezouza": ["Mishneh_Torah,_Tefillin,_Mezuzah_and_the_Torah_Scroll", 10],
-    "Hilkhot Sefer Torah": ["Mishneh_Torah,_Tefillin,_Mezuzah_and_the_Torah_Scroll", 16],
-    "Hilkhot Tzitzit": ["Mishneh_Torah,_Fringes", 0],
-    "Hilkhot Berakhot": ["Mishneh_Torah,_Blessings", 0],
-    "Hilkhot Mila": ["Mishneh_Torah,_Circumcision", 0],
-    "Hilkhot Shabbat": ["Mishneh_Torah,_Shabbat", 0],
-    "Hilkhot Eruvin": ["Mishneh_Torah,_Eruvin", 0],
-    "Hilkhot Shevissat Assor": ["Mishneh_Torah,_Laws_of_the_Cessation_of_Work_on_the_Tenth", 0],
-    "Hilkhot Shevissat Yom Tov": ["Mishneh_Torah,_Yom_Tov", 0],
-    "Hilkhot Hametz oumatzah": ["Mishneh_Torah,_Chametz_and_Matzah", 0],
-    "Hilkhot Shofar Soukkah Loulav": ["Mishneh_Torah,_Shofar,_Sukkah_and_Lulav", 0],
-    "Hilkhot Shekalim": ["Mishneh_Torah,_Shekalim", 0],
-    "Hilkhot Kiddoush haMeah": ["Mishneh_Torah,_Sanctification_of_the_New_Month", 0],
-    "Hilkhot Taaniyot": ["Mishneh_Torah,_Fasts", 0],
-    "Hilkhot Meguila veChanoukkah": ["Mishneh_Torah,_Megillah_and_Chanukah", 0],
-    "Hilkhot Ishout": ["Mishneh_Torah,_Marriage", 0],
-    "Hilkhot Gueroushim": ["Mishneh_Torah,_Divorce", 0],
-    "Hilkhot Yibboum veChalitza": ["Mishneh_Torah,_Levirate_Marriage_and_Release", 0],
-    "Hilkhot Naara Betoula": ["Mishneh_Torah,_Virgin_Maiden", 0],
-    "Hilkhot Sota": ["Mishneh_Torah,_Wayward_Wife", 0],
-    "Hilkhot Issoure Bia": ["Mishneh_Torah,_Forbidden_Intercourse", 0],
-    "Hilkhot Maakhalot Asourot": ["Mishneh_Torah,_Forbidden_Foods", 0],
-    "Hilkhot Shechita": ["Mishneh_Torah,_Slaughter", 0],
-    "Hilkhot Shvouot": ["Mishneh_Torah,_Oaths", 0],
-    "Hilkhot Nedarim": ["Mishneh_Torah,_Vows", 0],
-    "Hilkhot Nezirout": ["Mishneh_Torah,_The_Nazirite", 0],
-    "Hilkhot Aroukhin veHaramin": ["Mishneh_Torah,_Valuations_and_Devoted_Property", 0],
-    "Hilkhot Kilaim": ["Mishneh_Torah,_Mixed_Species", 0],
-    "Hilkhot Matnot Aniyyim": ["Mishneh_Torah,_Gifts_to_the_Poor", 0],
-    "Hilkhot Teroumat": ["Mishneh_Torah,_Terumah", 0],
-    "Hilkhot Maasser": ["Mishneh_Torah,_Tithes", 0],
-    "Hilkhot Maasser Sheni": ["Mishneh_Torah,_Second_Tithe_and_Fourth_Year_Produce", 0],
-    "Hilkhot Bikkourim": ["Mishneh_Torah,_First_Fruits_and_other_Gifts_to_Priests_Outside_the_Sanctuary", 0],
-    "Hilkhot Shemita veYovel": ["Mishneh_Torah,_Sabbatical_Year_and_Jubilee", 0],
-    "Hilkhot Beit haBechira": ["Mishneh_Torah,_The_Chosen_Temple", 0],
-    "Hilkhot Kelei haMikdash": ["Mishneh_Torah,_The_Temple_Vessels_and_Those_who_Serve_Therein", 0],
-    "Hilkhot Biiat haMikdash": ["Mishneh_Torah,_Entering_the_Sanctuary", 0],
-    "Hilkhot Issoure haMizbeach": ["Mishneh_Torah,_Items_Forbidden_on_the_Altar", 0],
-    "Hilkhot Maasei haKorbanot": ["Mishneh_Torah,_The_Procedure_of_the_Offerings", 0],
-    "Hilkhot Temidin ouMoussafim": ["Mishneh_Torah,_Daily_Offerings_and_Additional_Offerings", 0],
-    "Hilkhot Pessoule haMoukdashim": ["Mishneh_Torah,_Invalidation_of_Offerings", 0],
-    "Hilkhot Korban Pesah": ["Mishneh_Torah,_The_Passover_Offering", 0],
-    "Hilkhot Chagiga": ["Mishneh_Torah,_Festive_Offerings", 0],
-    "Hilkhot Bekhorot": ["Mishneh_Torah,_Firstborn", 0],
-    "Hilkhot Shegagot": ["Mishneh_Torah,_Offerings_for_Unintentional_Sins", 0],
-    "Hilkhot Mehoussar Kappara": ["Mishneh_Torah,_Those_Who_Lack_Atonement", 0],
-    "Hilkhot Temouraa": ["Mishneh_Torah,_Substituted_Offerings", 0],
-    "Hilkhot Toumat Met": ["Mishneh_Torah,_Corpse_Impurity", 0],
-    "Hilkhot Para Adouma": ["Mishneh_Torah,_Red_Heifer", 0],
-    "Hilkhot Toumat Tzaraat": ["Mishneh_Torah,_Leprosy", 0],
-    "Hilkhot Zav": ["Mishneh_Torah,_Other_Sources_of_Impurity", 0],
-    "Hilkhot Toumaot": ["Mishneh_Torah,_Other_Sources_of_Impurity", 13],
-    "Hilkhot Toumat Okhlin": ["Mishneh_Torah,_Impurity_of_Foods", 0],
-    "Hilkhot Keilim": ["Mishneh_Torah,_Vessels", 0],
-    "Hilkhot Mikvaot": ["Mishneh_Torah,_Immersion_Pools", 0],
-    "Hilkhot Nizkei Mammon": ["Mishneh_Torah,_Property_Damage", 0],
-    "Hilkhot Gneiva": ["Mishneh_Torah,_Theft", 0],
-    "Hilkhot Guezela vaAveda": ["Mishneh_Torah,_Robbery_and_Lost_Objects", 0],
-    "Hilkhot Hovel ouMazik": ["Mishneh_Torah,_Wounding_and_Damaging", 0],
-    "Hilkhot Rotzeah": ["Mishneh_Torah,_Murderer_and_the_Protection_of_Life", 0],
-    "Hilkhot Mekhira": ["Mishneh_Torah,_Sales", 0],
-    "Hilkhot Zekhiya ouMattana": ["Mishneh_Torah,_Acquisition_and_Gifts", 0],
-    "Hilkhot Shekhenim": ["Mishneh_Torah,_Neighbors", 0],
-    "Hilkhot Shelouhin veShoutafin": ["Mishneh_Torah,_Agents_and_Partners", 0],
-    "Hilkhot Avadim": ["Mishneh_Torah,_Slaves", 0],
-    "Hilkhot Skhirout": ["Mishneh_Torah,_Hiring", 0],
-    "Hilkhot Shoeil ouFikadon": ["Mishneh_Torah,_Borrowing_and_Depositing", 0],
-    "Hilkhot Malve veLove": ["Mishneh_Torah,_Creditor_and_Debtor", 0],
-    "Hilkhot Toan veniTan": ["Mishneh_Torah,_Plaintiff_and_Defendant", 0],
-    "Hilkhot Nakhalot": ["Mishneh_Torah,_Inheritance", 0],
-    "Hilkhot Sanhedrin": ["Mishneh_Torah,_Sanhedrin_and_the_Penalties_within_their_Jurisdiction", 0],
-    "Hilkhot Edout": ["Mishneh_Torah,_Evidence", 0],
-    "Hilkhot Mamrim": ["Mishneh_Torah,_Rebels", 0],
-    "Hilkhot Evel": ["Mishneh_Torah,_Mourning", 0],
-    "Hilkhot Melakhim ouMilhamot": ["Mishneh_Torah,_Kings_and_Wars", 0],
-};
-
-const hk_dayIndex = [];
-HILKHOT.forEach(([name, n]) => {
-    for (let c = 1; c <= n; c++) hk_dayIndex.push({ traite: name, chapLocal: c });
-});
-
-// 3. FONCTION DE TRADUCTION (Utilise un proxy gratuit)
-async function hk_translateToFr(text) {
-    if (!text) return "";
-    try {
-        const res = await fetch("https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=fr&dt=t&q=" + encodeURIComponent(text));
-        const data = await res.json();
-        return data[0].map(item => item[0]).join('');
-    } catch (e) {
-        return text; // Retourne l'anglais en cas d'erreur
-    }
-}
-
-// 4. MOTEUR DE RENDU
-async function halakha_render() {
-    const days = Math.floor((hk_current - hk_EPOCH) / 86400000);
-    const idx = ((days % hk_TOTAL) + hk_TOTAL) % hk_TOTAL;
-    const info = hk_dayIndex[idx];
-    const dayNum = idx + 1;
-
-    // Mise à jour de l'interface (IDs de ton HTML)
-    if(document.getElementById('hk_weekLabel')) document.getElementById('hk_weekLabel').textContent = hk_current.toLocaleDateString('fr-FR', {weekday:'long', day:'numeric', month:'long'});
-    if(document.getElementById('hk_dayNum')) document.getElementById('hk_dayNum').textContent = dayNum;
-    if(document.getElementById('hk_chapterRef')) document.getElementById('hk_chapterRef').textContent = `${info.traite} — Chapitre ${info.chapLocal}`;
-    if(document.getElementById('hk_progressFill')) document.getElementById('hk_progressFill').style.width = (idx / 999 * 100) + '%';
-    
-    const body = document.getElementById('hk_textBody');
-    body.innerHTML = '<div style="text-align:center;padding:50px;color:#8B6914;font-family:serif;">Synchronisation et traduction du texte sacré...</div>';
-
-    const entry = HILKHOT_SEFARIA[info.traite];
-    const ref = encodeURIComponent(`${entry[0]}.${info.chapLocal + entry[1]}`);
-
-    try {
-        const res = await fetch(`https://www.sefaria.org/api/texts/${ref}?context=0`);
-        const data = await res.json();
-
-        // Certains textes du Mishneh Torah retournent data.he / data.text
-        // comme un tableau de tableaux [chapitre][verset] au lieu de [verset].
-        // On aplatit au niveau 1 dans ce cas, et on filtre les valeurs nulles.
-        function normalizeVerses(raw) {
-            if (!raw) return [];
-            const arr = Array.isArray(raw) ? raw : [raw];
-            // Si le premier élément est lui-même un tableau → tableau de tableaux → aplatir
-            if (arr.length > 0 && Array.isArray(arr[0])) {
-                return arr.flat(1).filter(v => v !== null && v !== undefined && v !== '');
-            }
-            return arr.filter(v => v !== null && v !== undefined && v !== '');
-        }
-
-        const he = normalizeVerses(data.he);
-        const en = normalizeVerses(data.text);
-
-        if (he.length === 0 && en.length === 0) {
-            body.innerHTML = "<div style='text-align:center;padding:20px;color:#8B6914;font-family:serif;'>Texte non disponible sur Sefaria pour ce chapitre.</div>";
-            return;
-        }
-
-        let html = '';
-        
-        for(let i=0; i < Math.max(he.length, en.length); i++) {
-            // Extraire les notes <i> avant traduction, comme pour la Mishna
-            const enRaw = (typeof en[i] === 'string') ? en[i] : '';
-            const parser = new DOMParser();
-            const doc = parser.parseFromString('<body>' + enRaw + '</body>', 'text/html');
-            const docBody = doc.body;
-
-            // Collecter les notes <i> et les remplacer par des marqueurs
-            const notes = [];
-            docBody.querySelectorAll('i').forEach(el => {
-                const cls = el.className || '';
-                const txt = el.textContent.trim();
-                if (cls.includes('footnote') && txt.length >= 3) {
-                    const marker = `%%FN${notes.length}%%`;
-                    notes.push(txt);
-                    el.replaceWith(doc.createTextNode(marker));
-                } else {
-                    el.replaceWith(doc.createTextNode(txt));
-                }
-            });
-            docBody.querySelectorAll('sup').forEach(el => el.remove());
-
-            // Texte anglais propre (sans notes) pour la traduction
-            const cleanEn = docBody.textContent.trim();
-            const frText = await hk_translateToFr(cleanEn);
-            const heRaw = (typeof he[i] === 'string') ? he[i] : (Array.isArray(he[i]) ? he[i].join(' ') : '');
-            const heText = heRaw.replace(/<[^>]+>/g, '');
-
-            // Réinjecter les notes comme icônes dans le texte traduit
-            const translatedNotes = await Promise.all(notes.map(n => hk_translateToFr(n)));
-            const frWithNotes = frText.replace(/%%FN(\d+)%%/g, (_, idx) => {
-                const note = translatedNotes[parseInt(idx)] || '';
-                return '<span class="fn-wrap"><span class="fn-icon" onclick="this.parentNode.classList.toggle(\'fn-open\')">ℹ</span><span class="fn-bubble">' + note + '</span></span>';
-            });
-
-            html += `<div class="verse-block">
-                <div class="verse-num">${i + 1}</div>
-                <div class="verse-he">${heText}</div>
-                <div class="verse-fr">${frWithNotes}</div>
-            </div>`;
-            
-            // Mise à jour visuelle progressive
-            if (i % 2 === 0) body.innerHTML = html + "<div class='text-loading'><div class='spinner'></div><div class='loading-text'>Traduction en cours…</div></div>";
-        }
-        
-        body.innerHTML = html;
-    } catch(e) {
-        body.innerHTML = "<div style='text-align:center;padding:20px;'>Erreur de chargement. Vérifiez votre connexion.</div>";
-    }
-}
-
-// 5. FONCTIONS DE NAVIGATION
-window.halakha_navigate = (n) => { 
-    hk_current.setDate(hk_current.getDate() + n); 
-    halakha_render(); 
-};
-window.halakha_goToday = () => { 
-    hk_current = new Date(); 
-    hk_current.setHours(0,0,0,0); 
-    halakha_render(); 
-};
-window.halakha_onDatePick = (v) => { 
-    if(v) { 
-        hk_current = new Date(v); 
-        halakha_render(); 
-    } 
-};
-
-// 6. LANCEMENT
-document.addEventListener('DOMContentLoaded', halakha_render);
-document.addEventListener('DOMContentLoaded', tehilim_render);
-document.addEventListener('DOMContentLoaded', pv_render);
-document.addEventListener('DOMContentLoaded', tl_render);
 
 /* ═══════════════════════════════════════════════════════════════════
    JS TALMUD DE JÉRUSALEM
